@@ -24,7 +24,6 @@ public class BulletController : MonoBehaviour
     }
     void OnTriggerEnter(Collider objectCollider)
     {
-        Debug.Log(objectCollider.tag);
         Destroy(gameObject);
         lifeController = objectCollider.gameObject.GetComponent<LifeController>();
         if (lifeController != null)
