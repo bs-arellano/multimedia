@@ -13,7 +13,7 @@ public class GetWinner : MonoBehaviour
         {
             GameObject.Find("GanadorImagen").GetComponent<Image>().sprite = XImage;
         }
-        else if (winner.Equals("-"))
+        else if (winner.Equals("o"))
         {
             GameObject.Find("GanadorImagen").GetComponent<Image>().sprite = OImage;
         }

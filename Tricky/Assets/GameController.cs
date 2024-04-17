@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     int[] boardState = new int[9];
     public GameObject board;
     public GameObject turnoImagen;
+    public GameObject puntajeData;
     public Sprite XImage;
     public Sprite OImage;
 
@@ -17,7 +18,8 @@ public class GameController : MonoBehaviour
     public AudioClip wrong;
     bool jugador; //true=juegan X, false=juegan O
     int turno;
-
+    int xwins;
+    int owins;
     int[][] winningCombos = {
         new int [] {0,1,2},
         new int [] {3,4,5},
@@ -31,6 +33,9 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        xwins = PlayerPrefs.GetInt("xwins");
+        owins = PlayerPrefs.GetInt("owins");
+        puntajeData.GetComponent<Text>().text = xwins+"-"+owins;
         turno = 0;
         jugador = true;
         turnoImagen.GetComponent<Image>().sprite = XImage;
@@ -62,6 +67,11 @@ public class GameController : MonoBehaviour
             if (checkWinner())
             {
                 string last_winner = jugador ? "x" : "o";
+                if (jugador) {
+                    PlayerPrefs.SetInt("xwins",xwins+1);
+                } else {
+                    PlayerPrefs.SetInt("owins",owins+1);
+                }
                 PlayerPrefs.SetString("last_winner", last_winner);
                 SceneManager.LoadScene("End");
             }
